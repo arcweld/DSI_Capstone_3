@@ -1,0 +1,7 @@
+*.pyc
+.idea
+*.bak
+*.swp
+
+# Jupyter Notebook
+.ipynb_checkpoints
