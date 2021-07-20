@@ -6,6 +6,7 @@
 # Jupyter Notebook
 .ipynb_checkpoints
 .venv
+
 /data/
 /outputs/
 /venv/
