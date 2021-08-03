@@ -6,10 +6,10 @@ import sys
 import logging
 
 DATA_PATH = os.path.join('..','..','data','raw')
+datafile = DATA_PATH + '/X_train_sat6.csv'
 
-datafile = 'sat-6-full.mat'
-data = loadmat(os.path.join(DATA_PATH, datafile))
+df = pd.read_csv(datafile)
 
 
 if __name__ == "__main__":
-    load_data()
+    print(df.head())
