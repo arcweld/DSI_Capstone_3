@@ -8,7 +8,10 @@ import logging
 DATA_PATH = os.path.join('data','raw')
 datafile = DATA_PATH + '/X_train_sat6.csv'
 
-df = pd.read_csv(datafile)
+X_tr = pd.DataFrame([])
+for df in pd.read_csv(datafile, iterator=True, chunksize=1000):
+    X_tr = X_tr.append(df)
+    print('.', end='')
 
 
 if __name__ == "__main__":
