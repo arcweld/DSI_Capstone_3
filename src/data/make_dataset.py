@@ -5,7 +5,7 @@ import os
 import sys
 import logging
 
-DATA_PATH = os.path.join('..','..','data','raw')
+DATA_PATH = os.path.join('data','raw')
 datafile = DATA_PATH + '/X_train_sat6.csv'
 
 df = pd.read_csv(datafile)
