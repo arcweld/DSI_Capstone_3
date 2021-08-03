@@ -10,6 +10,8 @@ import sys
 
 from setuptools import find_packages, setup, Command
 
+import src
+
 # Package meta-data.
 NAME = 'Satellite Imagery Classification'
 DESCRIPTION = 'Given a satellite image, classify land cover in one of six categories'
@@ -24,10 +26,6 @@ REQUIRED = [
     # 'requests', 'maya', 'records',
 ]
 
-# What packages are optional?
-EXTRAS = {
-    # 'fancy feature': ['django'],
-}
 
 # Where the magic happens:
 setup(
