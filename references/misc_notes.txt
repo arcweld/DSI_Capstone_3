@@ -1,0 +1,37 @@
+172.104.211.225
+ssh root@172.104.211.225
+
+{SnkRhe}6fGmT>FQ2Ktp
+
+useradd -m arc
+usermod -aG sudo arc
+su - arc
+sudo apt update
+sudo apt upgrade -y
+sudo apt install tree -y
+sudo apt install pip -y
+sudo apt-get install git -y
+sudo apt install unzip -y
+alias python=python3
+export PATH=$PATH:/home/.local/bin
+pip install kaggle
+mkdir .kaggle
+git config --global user.name 'Steven Weld'
+git config --global user.email 'smweld.af@gmail.com'
+curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo gpg --dearmor -o /usr/share/keyrings/githubcli-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+sudo apt update
+sudo apt install gh
+gh auth login
+gh repo clone arcweld/DSI_Capstone_3
+cd DSI_Capstone_3
+cp kaggle.json ~/.kaggle/
+chmod 600 ~/.kaggle/kaggle.json
+mkdir data
+mkdir data/raw
+cd data/raw
+
+~/.local/bin/kaggle datasets download -d crawford/deepsat-sat6
+unzip \*.zip
+cd ../..
+pip install -r requirements.txt
