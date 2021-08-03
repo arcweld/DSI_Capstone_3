@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import os
 
 import tensorflow as tf
@@ -20,10 +23,12 @@ def define_model():
     model.add(Dropout(0.5))
     model.add(Dense(6, activation='softmax'))
 
-    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+    return model
+
+# model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 
-def train_model(X, y, X_test, y_test):
+def train_model(model, X, y, X_test, y_test):
     tbcallback = TensorBoard(log_dir='./logs/', histogram_freq=1, write_graph=True)
     checkpoint_path = os.path.join('..','..','models','checkpoints.ckpt')
     checkpoint_dir = os.path.dirname(checkpoint_path)
