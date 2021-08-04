@@ -4,3 +4,5 @@ numpy
 tensorflow
 pyyaml
 h5py
+folium
+geemap
