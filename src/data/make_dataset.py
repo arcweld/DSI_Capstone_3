@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 
 from scipy.io import loadmat
@@ -18,14 +18,14 @@ def fetch_training_data(data_path=DATA_PATH, nrows=None, chunksize=2000):
     X_tr_datafile = data_path + '/X_train_sat6.csv'
     X_tr = mem_managed_df_read(X_tr_datafile, nrows, chunksize)
     y_tr_datafile = data_path + '/y_train_sat6.csv'
-    y_tr = mem_managed_df_read(y_tr_datafile, nrows, chunksize)
+    y_tr = pd.read_csv(y_tr_datafile, header=None)
     return X_tr, y_tr
 
 def fetch_testing_data(data_path=DATA_PATH, nrows=None, chunksize=2000):
     X_test_datafile = data_path + '/X_test_sat6.csv'
     X_test = mem_managed_df_read(X_test_datafile, nrows, chunksize)
     y_test_datafile = data_path + '/y_test_sat6.csv'
-    y_test = mem_managed_df_read(y_test_datafile, nrows, chunksize)
+    y_test = pd.read_csv(y_test_datafile, header=None)
     return X_test, y_test
 
 def mem_managed_df_read(datafile, nrows=None, chunksize=2000):
@@ -33,7 +33,7 @@ def mem_managed_df_read(datafile, nrows=None, chunksize=2000):
     iter = 0
     total_iter = 32400 // chunksize
     for df in pd.read_csv(datafile, iterator=True, chunksize=chunksize, nrows=nrows, low_memory=False, header=None):
-        X = X.append(df)
+        X = X.append(df/255.)
         logging.debug('iter %s',str(iter))
         iter += 1
     return X
