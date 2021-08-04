@@ -18,14 +18,14 @@ def fetch_training_data(data_path=DATA_PATH, nrows=None, chunksize=2000):
     X_tr_datafile = data_path + '/X_train_sat6.csv'
     X_tr = mem_managed_df_read(X_tr_datafile, nrows, chunksize)
     y_tr_datafile = data_path + '/y_train_sat6.csv'
-    y_tr = pd.read_csv(y_tr_datafile, nrows=nrows, header=None)
+    y_tr = pd.read_csv(y_tr_datafile, header=None, nrows=nrows)
     return X_tr, y_tr
 
 def fetch_testing_data(data_path=DATA_PATH, nrows=None, chunksize=2000):
     X_test_datafile = data_path + '/X_test_sat6.csv'
     X_test = mem_managed_df_read(X_test_datafile, nrows, chunksize)
     y_test_datafile = data_path + '/y_test_sat6.csv'
-    y_test = pd.read_csv(y_test_datafile, nrows=nrows, header=None)
+    y_test = pd.read_csv(y_test_datafile, header=None, nrows=nrows)
     return X_test, y_test
 
 def mem_managed_df_read(datafile, nrows=None, chunksize=2000):
