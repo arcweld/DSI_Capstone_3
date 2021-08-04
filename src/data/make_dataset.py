@@ -33,7 +33,7 @@ def mem_managed_df_read(datafile, nrows=None, chunksize=2000):
     iter = 0
     total_iter = 32400 // chunksize
     for df in pd.read_csv(datafile, iterator=True, chunksize=chunksize, nrows=nrows, low_memory=False, header=None):
-        X = X.append(df)
+        X = X.append(df/255.)
         logging.debug('iter %s',str(iter))
         iter += 1
     return X
