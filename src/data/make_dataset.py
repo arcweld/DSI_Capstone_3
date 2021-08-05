@@ -1,6 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-
 from scipy.io import loadmat
 import pandas as pd
 import numpy as np

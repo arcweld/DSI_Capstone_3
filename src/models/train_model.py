@@ -1,7 +1,5 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 import os
+import datetime
 
 import tensorflow as tf
 from tensorflow.keras.callbacks import TensorBoard, ModelCheckpoint
@@ -23,22 +21,35 @@ def define_model():
     model.add(Dropout(0.5))
     model.add(Dense(6, activation='softmax'))
 
+    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+
     return model
 
-# model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 
-def train_model(model, X, y, X_test, y_test):
-    tbcallback = TensorBoard(log_dir='./logs/', histogram_freq=1, write_graph=True)
-    checkpoint_path = os.path.join('..','..','models','checkpoints.ckpt')
-    checkpoint_dir = os.path.dirname(checkpoint_path)
-    cp_callback = ModelCheckpoint(filepath=checkpoint_path,
-                                         save_weights_only=True,
-                                         verbose=1)
+def train_model(model, X, y, X_test, y_test, tb=True, cp=True):
 
     model.fit(X, y, batch_size=200, epochs=100, verbose=1, validation_data=(X_test, y_test), callbacks=[tbcallback, cp_callback])
     model.save_weights(os.path.join('..','..','models','model_weights'))
 
+def define_tensorboard():
+    log_dir = os.path.join('..',"logs/fit/",
+                            datetime.datetime.now().strftime("%Y%m%d-%H%M%S"))
+    tb_callback = TensorBoard(log_dir=log_dir,
+                              histogram_freq=1,
+                              write_graph=True)
+    return tb_callback
+
+def define_checkpoint():
+    checkpoint_path = os.path.join('..','models','checkpoints.ckpt')
+    cp_callback = ModelCheckpoint(filepath=checkpoint_path,
+                                  save_weights_only=True,
+                                  verbose=1)
+    return cp_callback
+
 
 if __name__ == "__main__":
-    define_model()
+    model = define_model()
+    model.summary()
+    define_tensorboard()
+    define_checkpoint()
